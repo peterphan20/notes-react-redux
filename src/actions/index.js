@@ -1,4 +1,4 @@
-import { READ, CREATE } from "../constants/actionTypes";
+import { READ, CREATE, DELETE } from "../constants/actionTypes";
 
 export const getNotes = () => {
 	const notesCollection = JSON.parse(localStorage.getItem("notes"));
@@ -20,4 +20,10 @@ export const addNote = (note) => {
 	return action;
 };
 
-export const updateNote = (id, note) => {};
+export const deleteNote = (id) => {
+	localStorage.removeItem(id);
+
+	const action = { type: DELETE, payload: id };
+	console.log(`successfully deleted: ${id}`);
+	return action;
+};
