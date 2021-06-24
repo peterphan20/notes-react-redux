@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
+import { notesReducer } from "./notes";
 
-export default combineReducers({
-  
-})
+export const reducers = combineReducers({ notesReducer });
