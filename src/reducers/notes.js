@@ -1,4 +1,4 @@
-import { READ, CREATE, DELETE } from "../constants/actionTypes";
+import { READ, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
 
 export const notesReducer = (notes = {}, action) => {
 	switch (action.type) {
@@ -8,9 +8,10 @@ export const notesReducer = (notes = {}, action) => {
 			const id = action.payload.id;
 			notes[id] = action.payload;
 			return notes;
+		case UPDATE:
+			return notes;
 		case DELETE:
-			const index = action.payload.id;
-			return Object.values(notes).filter((note) => note.id !== index);
+			return Object.values(notes).filter((note) => note.id !== action.payload);
 		default:
 			return notes;
 	}

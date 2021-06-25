@@ -1,4 +1,4 @@
-import { READ, CREATE, DELETE } from "../constants/actionTypes";
+import { READ, CREATE, DELETE, UPDATE } from "../constants/actionTypes";
 
 export const getNotes = () => {
 	const notesCollection = JSON.parse(localStorage.getItem("notes"));
@@ -10,9 +10,11 @@ export const getNotes = () => {
 export const addNote = (note) => {
 	// pull preexisting data from local storage
 	const notesCollection = JSON.parse(localStorage.getItem("notes"));
+
 	// add note to notesCollection
 	const id = note.id;
 	notesCollection[id] = note;
+
 	// converting note data to string and pushing it back into local storage
 	localStorage.setItem("notes", JSON.stringify(notesCollection));
 
@@ -20,10 +22,25 @@ export const addNote = (note) => {
 	return action;
 };
 
+export const updateNote = (note) => {
+	const notesCollection = JSON.parse(localStorage.getItem("notes"));
+
+	const id = note.id;
+	notesCollection[id] = note;
+
+	localStorage.setItem("notes", JSON.stringify(notesCollection));
+
+	const action = { type: UPDATE, payload: note };
+	return action;
+};
+
 export const deleteNote = (id) => {
-	localStorage.removeItem(id);
+	const notesCollection = JSON.parse(localStorage.getItem("notes"));
+
+	delete notesCollection[id];
+
+	localStorage.setItem("notes", JSON.stringify(notesCollection));
 
 	const action = { type: DELETE, payload: id };
-	console.log(`successfully deleted: ${id}`);
 	return action;
 };
