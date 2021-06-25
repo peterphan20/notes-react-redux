@@ -19,7 +19,7 @@ const Sidebar = () => {
 	};
 
 	return (
-		<div className="bg-gray-100 border-solid border-r border-gray-300 h-screen w-1/3">
+		<div className="bg-gray-100 border-solid border-r border-gray-300 h-screen max-w-7xl">
 			<div className="flex justify-between items-center py-5 px-4">
 				<h1 className="text-3xl font-bold">Notes</h1>
 				<button className="text-blue-600 text-l" onClick={() => onAddSubmit()}>

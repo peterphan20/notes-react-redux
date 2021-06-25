@@ -1,33 +1,30 @@
-import React from "react";
-// import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
-// import { getNotes } from "./actions";
+import { getNotesFromLocalStorage } from "./actions";
 
 const App = () => {
-	// const dispatch = useDispatch();
-	// const state = useSelector((state) => state.notesReducer);
+	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	// if (!localStorage.getItem("notes")) {
-	// 	// 	// instantiate an empty object for people visit app for first time
-	// 	// 	const note = JSON.stringify({});
-	// 	// 	// local storage can only hold strings
-	// 	// 	localStorage.setItem("notes", note);
-	// 	// 	// call getNotes which pulls from localstorage to sync with redux store
-	// 	// 	dispatch(getNotes());
-	// 	// } else {
-	// 	// 	dispatch(getNotes());
-	// 	// }
-	// 	dispatch(getNotes());
-	// }, [dispatch]);
+	useEffect(() => {
+		if (!localStorage.getItem("notes")) {
+			// instantiate an empty object for people visit app for first time
+			const note = JSON.stringify({});
+
+			// local storage can only hold strings
+			localStorage.setItem("notes", note);
+
+			// call getNotesFromLocalStorage which pulls from localstorage to sync with redux store
+			dispatch(getNotesFromLocalStorage());
+		} else {
+			dispatch(getNotesFromLocalStorage());
+		}
+	}, [dispatch]);
 
 	return (
 		<div className="flex overflow-hidden">
-			{/* {Object.keys(state).length === 0 ? (
-				<button>Create new note</button>
-			) : } */}
 			<Sidebar />
 			<Main />
 		</div>
