@@ -1,21 +1,21 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import Note from "./Note";
 
+import Note from "./Note";
 import { addNote } from "../actions";
 
-const Sidebar = ({ currentId, setCurrentId }) => {
+const Sidebar = () => {
 	const dispatch = useDispatch();
 
 	const onAddSubmit = () => {
-		const noteBody = {
+		const newNote = {
 			id: uuidv4(),
-			title: "Untitled Note",
+			title: "Untitled note",
 			body: "",
 			lastModified: Date.now(),
 		};
-		dispatch(addNote(noteBody));
+		dispatch(addNote(newNote));
 	};
 
 	return (
@@ -27,7 +27,7 @@ const Sidebar = ({ currentId, setCurrentId }) => {
 				</button>
 			</div>
 			<div>
-				<Note setCurrentId={setCurrentId} />
+				<Note />
 			</div>
 		</div>
 	);
