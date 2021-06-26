@@ -7,23 +7,24 @@ const Note = () => {
 	const dispatch = useDispatch();
 
 	const notesValue = Object.values(notes);
-	const renderedList = notesValue.map((value) => {
+	const sortedList = notesValue.sort((a, b) => b.lastModified - a.lastModified);
+	const renderedList = sortedList.map((value) => {
 		return (
 			<div
-				className="hover:bg-gray-300 w-full h-full p-4"
+				className="hover:bg-gray-300 h-full p-4"
 				key={value.id}
 				onClick={() => dispatch(selectNote(value.id))}
 			>
-				<div className="flex justify-between items-center">
-					<strong>{value.title}</strong>
+				<div className="flex justify-between items-center pb-3">
+					<strong className="truncate ...">{!value.title ? "Untitle note" : value.title}</strong>
 					<button
-						className="text-l text-red-600 outline-none"
+						className="text-red-600 outline-none"
 						onClick={() => dispatch(deleteNote(value.id))}
 					>
 						Delete
 					</button>
 				</div>
-				<p className="text-md truncate">{value.body}</p>
+				<p className="text-sm truncate ...">{value.body}</p>
 				<p className="text-xs">
 					Last Modified:{" "}
 					{new Date(value.lastModified).toLocaleDateString("en-US", {

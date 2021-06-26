@@ -24,7 +24,7 @@ const App = () => {
 	}, [dispatch]);
 
 	return (
-		<div className="flex overflow-hidden">
+		<div className="flex overflow-hidden w-full h-full">
 			<Sidebar />
 			<Main />
 		</div>

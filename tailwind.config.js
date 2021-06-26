@@ -6,6 +6,9 @@ module.exports = {
 			fontFamily: {
 				body: ["Roboto Mono"],
 			},
+			maxWidth: {
+				"8xl": "92rem",
+			},
 		},
 	},
 	variants: {

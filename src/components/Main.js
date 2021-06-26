@@ -20,8 +20,8 @@ const Main = () => {
 
 	useEffect(() => {
 		const currSelectedNote = notes[noteId];
-		setTitle(currSelectedNote?.title);
-		setBody(currSelectedNote?.body);
+		setTitle(currSelectedNote?.title || "");
+		setBody(currSelectedNote?.body || "");
 	}, [noteId, notes]);
 
 	const handleTitleUpdate = (value) => {
@@ -44,14 +44,14 @@ const Main = () => {
 	};
 
 	return (
-		<div className="h-screen w-full">
-			<div className="flex flex-col bg-gray-100 p-7">
+		<div className="flex flex-col h-screen w-full">
+			<div className=" bg-gray-100 p-7">
 				<div className="pb-5">
 					<input
 						type="text"
 						autoFocus
 						placeholder="Title"
-						className="text-xl border-solid border border-gray-300 w-full outline-none py-2 px-1 focus:ring-2 focus:ring-blue-500"
+						className="flex-grow-0 flex-shrink-0 text-xl border-solid border border-gray-300 w-full outline-none py-2 px-5 focus:ring-2 focus:ring-blue-500"
 						value={title}
 						onChange={(e) => handleTitleUpdate(e.target.value)}
 						disabled={!noteId}
@@ -59,15 +59,17 @@ const Main = () => {
 				</div>
 				<textarea
 					placeholder="Write your notes here"
-					className="text-l border-solid border border-gray-300 p-1 h-96 w-full outline-none resize-none focus:ring-2 focus:ring-blue-500"
+					className="flex-grow-0 flex-shrink-0 border-solid border border-gray-300 py-3 px-5 w-full max-w-9xl h-96 outline-none resize-none focus:ring-2 focus:ring-blue-500"
 					value={body}
 					onChange={(e) => handleBodyUpdate(e.target.value)}
 					disabled={!noteId}
 				/>
 			</div>
-			<div className="bg-gray-200 border-t border-solid border-gray-300 p-7 min-h-full">
-				<h1 className="text-2xl font-semibold pb-7">{notes.title}</h1>
-				<ReactMarkdown className="text-md h-80 overflow-auto">{notes.body}</ReactMarkdown>
+			<div className="flex-grow-0 flex-shrink-0 bg-gray-200 border-t border-solid border-gray-300 p-7 max-w-9xl min-h-full overflow-clip overflow-hidden overflow-y-auto">
+				<h1 className="text-2xl font-semibold pb-7">
+					{!title || title === "Untitled note" ? "Notes preview" : title}
+				</h1>
+				<ReactMarkdown className=" text-md h-80">{body}</ReactMarkdown>
 			</div>
 		</div>
 	);
